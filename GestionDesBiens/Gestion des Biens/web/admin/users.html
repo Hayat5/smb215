@@ -19,9 +19,9 @@ and open the template in the editor.
         </style>
     </head>
     <body>
-        <div class="menu"><a href="center.html">Centers</a><a href="item.html">Items</a> <a href="location.html">Location</a>
+          <div class="menu"><a href="center.html">Centers</a><a href="item.html">Items</a> <a href="location.html">Location</a>
             <a href="salle.html">Salle</a><a href="transaction.html">Transaction</a><a href="transport.html">Transport</a>
-            <a href="type.html">Type</a><a href="users.html">Users</a> <a href="groupe.html">Groupe</a>
+            <a href="type.html">Type</a> <a href="personnel.html">Personnel</a><a href="users.html">Users</a> <a href="groupe.html">Groupe</a>
         </div>
         <div id="loads"></div>
         <table id="table" class="hidden">
@@ -37,7 +37,8 @@ and open the template in the editor.
         <div><button class="new">New</button></div>
 
         <div class="Items none">
-            <table>  
+            <table> 
+                <tr><td>Id</td><td><input type="text" id="row"></td></tr>
                 <tr><td>Users Name</td><td><input id="usersname" type="text" value="" /></td></tr>
                <tr><td>password</td><td><input id="password" type="password" value="" /></td></tr>
                 <tr><td>Name</td><td><input id="name" type="text" value="" /></td></tr>
@@ -85,7 +86,7 @@ and open the template in the editor.
                                     if (data[i].username) {
 
 
-                                        txt += "<tr id='" + data[i].username + "' ><td id='name_" + data[i].username + "'>" + data[i].username + "</td><td id='name_" + data[i].name + "'>" + data[i].name + "</td>\n\
+                                        txt += "<tr id='" + data[i].username +  "' ><td class='users' id='name_" + i + "'>" + data[i].username + "</td><td id='name_" + data[i].name + "'>" + data[i].name + "</td>\n\
                                                  <td>" + data[i].registerDt + "</td><td class='edit' id='edit_" + data[i].username + "'>Edit </td><td class='delete' id='delete_" + data[i].username + "'>Delete </td></tr>";
 
                                     }
@@ -148,6 +149,9 @@ and open the template in the editor.
                 var id = $(this).attr('id');
 
                 var res = id.substring(5);
+                alert(res);
+                var numrow = $(this).find('users').attr('id');
+               // alert(numrow);
                 document.getElementById("usersname").readOnly = true;
 
                 $.ajax({
@@ -191,7 +195,8 @@ and open the template in the editor.
                 if ($("#name_" + username).length > 0) {
                     if ($("#name_" + username).text() == username)
                     {
-
+ console.log("same name ");
+ return false;
                         var edit = '{"name":"' + name + '","password":"' + pass + '","registerDt":"' + date + '","username":"' + username + '"}';
                         jQuery.ajax({
                             url: "http://localhost:8080/GestionDesBiens/webresources/model.users/" + username,

@@ -12,25 +12,28 @@ and open the template in the editor.
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <script type="text/javascript" language="javascript" src="http://code.jquery.com/jquery-1.11.3.min.js"></script>
         <script type="text/javascript" language="javascript" src="http://code.jquery.com/ui/1.11.3/jquery-ui.js"></script>
-        <style>
-     
-        </style>
+        <script type='text/javascript' src='http://code.jquery.com/jquery-git2.js'></script>
+        <script type='text/javascript' src="http://codeinnovators.meximas.com/pdfexport/jspdf.debug.js"></script>
+    
     </head>
     <body>
-        <div class="menu"><a href="center.html">Centers</a><a href="item.html">Items</a> <a href="location.html">Location</a>
+          <div class="menu"><a href="center.html">Centers</a><a href="item.html">Items</a> <a href="location.html">Location</a>
             <a href="salle.html">Salle</a><a href="transaction.html">Transaction</a><a href="transport.html">Transport</a>
-            <a href="type.html">Type</a><a href="users.html">Users</a> <a href="groupe.html">Groupe</a>
+            <a href="type.html">Type</a> <a href="personnel.html">Personnel</a><a href="users.html">Users</a> <a href="groupe.html">Groupe</a>
         </div>
-        
         <div id="loads"></div>
         <table id="table" class="hidden">
             <tr class="head">
-                <th>Personnel Id</th>
-                <th>personnelName</th>
+                <th class="export">Personnel Id</th>
+                <th class="export">personnelName</th>
                 <th>Edit</th>
                 <th>Delete</th>
             </tr>
         </table>
+          <div class="btn-group open">
+	<button class="btn btn-warning btn-sm " id="export">Export Table Data</button>
+							
+	</div>
         <div><button class="new">New</button></div>
 
         <div class="Items none">
@@ -50,11 +53,27 @@ and open the template in the editor.
              
 
                 list();
-              
+              $('#export').click(demoFromHTML);
 
             });
             
-         
+            function demoFromHTML() {
+                var pdf = new jsPDF('p', 'pt', 'letter');
+
+                pdf.cellInitialize();
+                pdf.setFontSize(10);
+                var width = '';
+                $.each($('#table tr'), function (i, row) {
+                    $.each($(row).find("td.export, th.export"), function (j, cell) {
+                        var txt = $(cell).text().trim() || " ";
+                      
+                        var width = (j == 2) ? 300 : 140; //make with column smaller
+                        pdf.cell(10, 50, width, 30, txt, i);
+                    });
+                });
+
+                pdf.save('personnel.pdf');
+            }
             function list() {
                 $.ajax({
                     type: 'GET',
@@ -75,7 +94,7 @@ and open the template in the editor.
                                     if (data[i].personnelId) {
 
 
-                                        txt += "<tr id='" + data[i].personnelId + "' ><td id='name_" + data[i].personnelId + "'>" + data[i].personnelId + "</td><td id='name_" + data[i].personnelId + "'>" + data[i].personnelName + "</td>\n\
+                                        txt += "<tr id='" + data[i].personnelId + "' ><td id='name_" + data[i].personnelId + "' class='export'>" + data[i].personnelId + "</td><td id='name_" + data[i].personnelId + "' class='export'>" + data[i].personnelName + "</td>\n\
                                                  <td class='edit' id='edit_" + data[i].personnelId + "'>Edit </td><td class='delete' id='delete_" + data[i].personnelId + "'>Delete </td></tr>";
 
                                     }

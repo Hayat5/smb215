@@ -43,9 +43,9 @@ public class ItemFacadeREST extends AbstractFacade<Item> {
     @Consumes({"application/xml", "application/json"})
     public void create(Item entity) {
 
- String url = "http://localhost:8080/Gestion/webresources/model.item/";
+ String url = "http://localhost:8080/GestionDesBiens/faces/users/singleitem.html#"+entity.getItemId();
 
-        QRCode.createqr(entity.getItemId(), url);
+        QRCode.createqr(entity.getItemId(),entity.getItemName(), url);
         super.create(entity);
     }
 
@@ -71,22 +71,22 @@ public class ItemFacadeREST extends AbstractFacade<Item> {
     }
 
     @GET
-    @Path("/get{id}")
+    @Path("/get{id}{name}")
     @Produces("image/png")
-    public Response getFile(@PathParam("id") Integer id) {
-        String FILE_PATH = "../applications/images/Item"+id+".png";
+    public Response getFile(@PathParam("id") Integer id,@PathParam("name") String name) {
+        String FILE_PATH = "../applications/images/"+name+"_"+id+".png";
         File file = new File(FILE_PATH);
 
         ResponseBuilder response = Response.ok((Object) file);
         response.header("Content-Disposition",
-                "attachment; filename=Item"+id+".png");
+                "attachment; filename="+name+"_"+id+".png");
         return response.build();
 
     }
 
     @GET
     @Override
-    @Produces({"application/json", "application/xml"})
+    @Produces({"application/json"})
     public List<Item> findAll() {
         return super.findAll();
     }

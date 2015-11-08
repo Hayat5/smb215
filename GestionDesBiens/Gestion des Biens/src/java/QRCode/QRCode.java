@@ -28,16 +28,13 @@ public class QRCode {
      public QRCode() {
     }
 
-     public  static void createqr(int id,String url) {
-         System.out.println(url);
-           System.out.println(id);
-        String myCodeText = url + id;
+     public  static void createqr(int id,String name,String url) {
+         
+        String myCodeText = url;
         
-        System.out.println(url);
-           System.out.println(id);
-              System.out.println(myCodeText);
+       
         // change path as per your laptop/desktop location
-        String filePath = "../applications/images/Item"+id+".png";
+        String filePath = "../applications/images/"+name+"_"+id+".png";
       // String filePath = "/Users/Hayat/test.png";
          //String filePath = "/Users/Hayat/NetBeansProjects/GestionsBiens/web/images/qr.png";
         int size = 125;

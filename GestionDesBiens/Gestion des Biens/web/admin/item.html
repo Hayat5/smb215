@@ -13,30 +13,34 @@ and open the template in the editor.
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <script type="text/javascript" language="javascript" src="http://code.jquery.com/jquery-1.11.3.min.js"></script>
         <script type="text/javascript" language="javascript" src="http://code.jquery.com/ui/1.11.3/jquery-ui.js"></script>
-        <style>
-     
-        </style>
+        <script type='text/javascript' src='http://code.jquery.com/jquery-git2.js'></script>
+        <script type='text/javascript' src="http://codeinnovators.meximas.com/pdfexport/jspdf.debug.js"></script>
+    
     </head>
     <body>
-        <div class="menu"><a href="center.html">Centers</a><a href="item.html">Items</a> <a href="location.html">Location</a>
+          <div class="menu"><a href="center.html">Centers</a><a href="item.html">Items</a> <a href="location.html">Location</a>
             <a href="salle.html">Salle</a><a href="transaction.html">Transaction</a><a href="transport.html">Transport</a>
-            <a href="type.html">Type</a><a href="users.html">Users</a> <a href="groupe.html">Groupe</a>
+            <a href="type.html">Type</a> <a href="personnel.html">Personnel</a><a href="users.html">Users</a> <a href="groupe.html">Groupe</a>
         </div>
         <div id="loads"></div>
         <table id="table" class="hidden">
             <tr class="head">
-                  <th>Item Code</th>
-                <th>Date created</th>
-                <th>Item Name</th>
-                <th>Type</th>
-                <th>Specification</th>
+               <th class="export">Item Code</th>
+                <th class="export">Date created</th>
+                <th class="export">Item Name</th>
+                <th class="export">Type</th>
+                <th class="export">Specification</th>
 
-                <th>Location</th>
+                <th class="export">Location</th>
                 <th>Image</th>
                 <th>Edit</th>
                 <th>Delete</th>
             </tr>
         </table>
+          <div class="btn-group open">
+	<button class="btn btn-warning btn-sm " id="export">Export Table Data</button>
+							
+	</div>
         <div><button class="new">New</button></div>
 
         <div class="Items none">
@@ -65,8 +69,26 @@ and open the template in the editor.
                 list();
                 getAllType();
                 getAlllocation();
+                 $('#export').click(demoFromHTML);
 
             });
+               function demoFromHTML() {
+                var pdf = new jsPDF('p', 'pt', 'letter');
+
+                pdf.cellInitialize();
+                pdf.setFontSize(10);
+                var width = '';
+                $.each($('#table tr'), function (i, row) {
+                    $.each($(row).find("td.export, th.export"), function (j, cell) {
+                        var txt = $(cell).text().trim() || " ";
+                      
+                        var width = (j == 1) ? 150 : 90; //make with column smaller
+                        pdf.cell(10, 50, width, 30, txt, i);
+                    });
+                });
+
+                pdf.save('item.pdf');
+            }
             function getAllType() {
 
                 $.ajax({
@@ -155,11 +177,11 @@ and open the template in the editor.
                                     if (data[i].itemCode && data[i].itemDateCreated) {
 
 
-                                        txt += "<tr id='" + data[i].itemId + "' ><td id='code_" + data[i].itemId + "'>" + data[i].itemCode + "</td>\n\
-                                           <td class='date' id='date_" + data[i].itemId + "'>" + data[i].itemDateCreated + "</td><td class='name' id='name_" + data[i].itemId + "' >" + data[i].itemName + "</td>\n\
-                                           <td class='type' id='type_" + data[i].typeId.typeId + "'>" + data[i].typeId.typeName + "</td>\n\\n\
-                                         <td class='spec' id='spec_" + data[i].itemId + "'>" + data[i].itemSpecification + "</td><td id='loc_" + data[i].locationId.locationId + "' class='loc' >" + data[i].locationId.locationId + "</td>" +
-                                                "<td><a href='http://localhost:8080/GestionDesBiens/webresources/model.item/get" + data[i].itemId + "'>Download</td></td><td class='edit' id='edit_" + data[i].itemId + "'>Edit </td><td class='delete' id='delete_" + data[i].itemId + "'>Delete </td></tr>";
+                                        txt += "<tr id='" + data[i].itemId + "' ><td id='code_" + data[i].itemId + "' class='export'>" + data[i].itemCode + "</td>\n\
+                                           <td class='date export' id='date_" + data[i].itemId + "'>" + data[i].itemDateCreated + "</td><td class='name export' id='name_" + data[i].itemId + "' >" + data[i].itemName + "</td>\n\
+                                           <td class='type export' id='type_" + data[i].typeId.typeId + "'>" + data[i].typeId.typeName + "</td>\n\\n\
+                                         <td class='spec export' id='spec_" + data[i].itemId + "'>" + data[i].itemSpecification + "</td><td id='loc_" + data[i].locationId.locationId + "' class='loc export' >" + data[i].locationId.locationId + "</td>" +
+                                         "<td><a href='http://localhost:8080/GestionDesBiens/webresources/model.item/get" + data[i].itemId +data[i].itemName+ "'>Download</td></td><td class='edit' id='edit_" + data[i].itemId + "'>Edit </td><td class='delete' id='delete_" + data[i].itemId + "'>Delete </td></tr>";
 
                                     }
                                 }
