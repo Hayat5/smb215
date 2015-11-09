@@ -14,8 +14,14 @@
         
         <script type="text/javascript">
             $(window).load(function () {
-                
-                Parse.initialize("nvlOlG2xjqcTOptsoQtEV3GceVjoSItfbcYB9DXn", "ueepExpmIvMXbIH4S0cVmhONaitd62SaERX3HiqN");
+                parse();
+               
+              
+setInterval(parse(), 50000);
+
+
+    function parse()
+                {  Parse.initialize("nvlOlG2xjqcTOptsoQtEV3GceVjoSItfbcYB9DXn", "ueepExpmIvMXbIH4S0cVmhONaitd62SaERX3HiqN");
                 var Location = Parse.Object.extend("Location");
                 var query = new Parse.Query(Location);
                 query.equalTo("lastLocation", 1);
@@ -35,10 +41,8 @@
                         alert("Error: " + error.code + " " + error.message);
                     }
 
-                });
-
-
-
+                }); 
+              }
 
 
                 function initialize(myCenter)
