@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <script type="text/javascript" language="javascript" src="http://code.jquery.com/jquery-1.11.3.min.js"></script>
+        <script type="text/javascript" language="javascript" src="http://code.jquery.com/ui/1.11.3/jquery-ui.js"></script>
+
+        <script
+            src="http://maps.googleapis.com/maps/api/js">
+        </script>
+
+        <script>
+            $(document).ready(function () {
+                (function () {
+
+                    $.get("http://localhost:8080/GestionDesBiens/webresources/model.center/map", function (data) {
+                        console.log(data);
+                        var a = JSON.stringify(data);
+                        var arrloc = $.map(data, function (el) {
+                            return el;
+                        })
+                        var lan = arrloc[0];
+                        lan = lan.replace(/"/g, '');
+                        alert(lan);
+                        // var lan = arrloc[0];
+
+                        //var long = arrloc[1]
+                        var lon = arrloc[1];
+                        lon = lon.replace(/"/g, '');
+
+                        if (isNaN(lan)) {
+                            alert(lan + " is not a number");
+                        } else {
+                            alert(lan + " is a number");
+                        }
+
+
+                        var coordines = lan + "," + lon;
+
+                        //var myCenter = new google.maps.LatLng(lan +", "+ lon);
+                        var myCenter = new google.maps.LatLng(lan, lon);
+                        //  var myCenter = new google.maps.LatLng(123,456);
+
+
+
+
+                        initialize(myCenter);
+
+                    });
+
+
+
+
+                    function initialize(myCenter)
+                    {
+                        var mapProp = {
+                            center: myCenter,
+                            zoom: 5,
+                            mapTypeId: google.maps.MapTypeId.ROADMAP
+                        };
+                        var map = new google.maps.Map(document.getElementById("googleMap"), mapProp);
+                        var marker = new google.maps.Marker({
+                            position: myCenter,
+                        });
+                        marker.setMap(map);
+                    }
+
+                    google.maps.event.addDomListener(window, 'load', initialize);
+                })();
+            });
+
+        </script>
+    </head>
+
+    <body>
+        <div id="googleMap" style="width:500px;height:380px;"></div>
+
+    </body>
+</html>
