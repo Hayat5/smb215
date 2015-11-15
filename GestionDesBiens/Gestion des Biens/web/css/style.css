@@ -21,6 +21,9 @@ and open the template in the editor.
         padding: 5px;
        
 }
+.externe{
+    display: none;
+}
 .menu{
      margin: 10px 0px;
 }

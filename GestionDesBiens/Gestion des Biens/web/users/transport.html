@@ -14,14 +14,13 @@ and open the template in the editor.
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <script type="text/javascript" language="javascript" src="http://code.jquery.com/jquery-1.11.3.min.js"></script>
         <script type="text/javascript" language="javascript" src="http://code.jquery.com/ui/1.11.3/jquery-ui.js"></script>
-        <script type='text/javascript' src='http://code.jquery.com/jquery-git2.js'></script>
         <script type='text/javascript' src="http://codeinnovators.meximas.com/pdfexport/jspdf.debug.js"></script>
-    
+
     </head>
     <body>
         <div class="menu">      
             <a href="transaction.html">Transaction</a><a href="transport.html">Transport</a>
-                 </div>
+        </div>
 
         <div id="loads"></div>
         <table id="table" class="hidden">
@@ -34,9 +33,9 @@ and open the template in the editor.
             </tr>
         </table>
         <div class="btn-group open">
-	<button class="btn btn-warning btn-sm " id="export">Export Table Data</button>
-							
-	</div>
+            <button class="btn btn-warning btn-sm " id="export">Export Table Data</button>
+
+        </div>
         <div><button class="new">New</button></div>
 
         <div class="Items none">
@@ -66,8 +65,8 @@ and open the template in the editor.
 
 
             });
-            
-             function demoFromHTML() {
+
+            function demoFromHTML() {
                 var pdf = new jsPDF('p', 'pt', 'letter');
 
                 pdf.cellInitialize();
@@ -76,7 +75,7 @@ and open the template in the editor.
                 $.each($('#table tr'), function (i, row) {
                     $.each($(row).find("td.export, th.export"), function (j, cell) {
                         var txt = $(cell).text().trim() || " ";
-                      
+
                         var width = (j == 2) ? 300 : 140; //make with column smaller
                         pdf.cell(10, 50, width, 30, txt, i);
                     });
@@ -84,7 +83,7 @@ and open the template in the editor.
 
                 pdf.save('transport.pdf');
             }
-            
+
             function getAllPersonnel() {
 
                 $.ajax({
@@ -151,6 +150,7 @@ and open the template in the editor.
                         }
                         $('.edit').click(edit);
                         $('.delete').click(delete2);
+                          $('.new').click(New);
 
                     },
                     error: function () {
@@ -219,7 +219,7 @@ and open the template in the editor.
                     }
                 });
                 $(".justedit").show();
-                $(".none").show();
+                $(".none").css("display","block");
                 $("#table tr:not(.head)").remove();
 
                 list();
@@ -295,7 +295,7 @@ and open the template in the editor.
                         contentType: 'application/json; charset=utf-8',
                         success: function (html) {
                             //noinspection DocumentWriteJS
-                            $(".none").hide();
+                            $(".none").css("display", "none");
                             $("#table tr:not(.head)").remove();
                             console.log("try to update");
                             list();
@@ -305,20 +305,13 @@ and open the template in the editor.
                     });
                 }
             });
-            $('.new').click(function (e) {
-
-
+            function New() {
                 $(".justedit").hide();
                 $("#transportid").val("");
                 $("#personnel").val("");
                 $("#date").val("");
-
-
-
-                $(".none").show();
-
-
-            });
+                $(".none").css("display", "block");
+            }
 
         </script>
 

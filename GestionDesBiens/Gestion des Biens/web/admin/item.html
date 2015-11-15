@@ -13,7 +13,7 @@ and open the template in the editor.
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <script type="text/javascript" language="javascript" src="http://code.jquery.com/jquery-1.11.3.min.js"></script>
         <script type="text/javascript" language="javascript" src="http://code.jquery.com/ui/1.11.3/jquery-ui.js"></script>
-        <script type='text/javascript' src='http://code.jquery.com/jquery-git2.js'></script>
+        
         <script type='text/javascript' src="http://codeinnovators.meximas.com/pdfexport/jspdf.debug.js"></script>
     
     </head>
@@ -62,8 +62,8 @@ and open the template in the editor.
 
 
             $(document).ready(function () {
-                $.datetimepicker.setLocale('en');
-                $('#itemdate').datetimepicker({ format:'Y-m-d h:m:s',defaultHours: 0, defaultMinutes: 0});
+                jQuery.datetimepicker.setLocale('en');
+                jQuery('#itemdate').datetimepicker({ format:'Y-m-d h:m:s',defaultHours: 0, defaultMinutes: 0});
                 
 
                 list();
@@ -192,6 +192,7 @@ and open the template in the editor.
                         }
                         $('.edit').click(edit);
                         $('.delete').click(delete2);
+                        $('.new').click(New);
 
                     },
                     error: function () {
@@ -262,7 +263,7 @@ and open the template in the editor.
                     }
                 });
                  $(".justedit").show();
-                $(".none").show();
+                 $(".none").css("display","block");
                 $("#table tr:not(.head)").remove();
 
                 list();
@@ -358,25 +359,17 @@ and open the template in the editor.
                     });
                 }
             });
-            $('.new').click(function (e) {
-                e.preventDefault();
-              
-              $(".justedit").hide();
+            function New() {        
+                $(".justedit").hide();
                 $("#itemid").val("");
                 $("#itemcode").val("");
                 $("#itemdate").val("");
                 $("#name").val("");
                 $("#spec").val("");
-
                 $("#type").val("");
                 $("#loc").val("");
-               
-
-
-                $(".none").show();
-
-
-            });
+                 $(".none").css("display", "block");
+            }
 
         </script>
      
