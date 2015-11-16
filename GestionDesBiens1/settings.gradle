@@ -1,0 +1,1 @@
+include ':app',':subProject:apache-httpcomponents-httpclient',':subProject:http-core-4.1'
