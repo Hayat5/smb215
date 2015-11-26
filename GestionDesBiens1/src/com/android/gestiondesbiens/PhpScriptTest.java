@@ -52,7 +52,7 @@ public class PhpScriptTest extends Activity {
         {
         	
             HttpClient httpclient = new DefaultHttpClient();
-            HttpPost httppost = new HttpPost("http://192.168.1.100:80/insertTest.php");
+            HttpPost httppost = new HttpPost("http://192.168.1.108:80/insertTest.php");
             httppost.setEntity(new UrlEncodedFormEntity(nameValuePairs));
             HttpResponse response = httpclient.execute(httppost);
           //  HttpEntity entity = response.getEntity();

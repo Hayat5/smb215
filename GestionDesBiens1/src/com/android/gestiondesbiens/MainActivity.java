@@ -50,7 +50,7 @@ public class MainActivity extends ListActivity {
 	public boolean onOptionsItemSelected(MenuItem item) {
 		if (item.getItemId() == R.id.action_get_locations) {
 			if (isOnline()) {
-				requestData("http://192.168.1.100:8888/GestionDesBiens/webresources/model.location");
+				requestData("http://192.168.1.108:8888/GestionDesBiens/webresources/model.location");
 			} else {
 				Toast.makeText(this, "Network isn't available", Toast.LENGTH_LONG).show();
 			}

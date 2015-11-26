@@ -68,7 +68,7 @@ public class TransactionsActivity extends Activity {
 		             //nameValuePairs.add(new BasicNameValuePair("onlineUserId", String.valueOf(2)));
 		             
 		            HttpClient httpclient = new DefaultHttpClient();
-		            HttpPost httppost = new HttpPost("http://192.168.1.100:80/Insert_Transaction.php");
+		            HttpPost httppost = new HttpPost("http://192.168.1.108:80/Insert_Transaction.php");
 		            httppost.setEntity(new UrlEncodedFormEntity(nameValuePairs));
 		            HttpResponse response = httpclient.execute(httppost);
 		           runOnUiThread(new Runnable() {
@@ -101,7 +101,10 @@ public class TransactionsActivity extends Activity {
 		this.lstReservedWorkDetails = (ListView)findViewById(R.id.lstTransactionDetails);
 		
 		this.LoadGridHeader();
-
+		
+//		tasks = new ArrayList<>();
+//		this.requestData("http://192.168.1.108:8888/GestionDesBiens/webresources/model.transaction");
+		
 		this.lstReservedWorkDetails.setOnItemClickListener(new OnItemClickListener() {
 
 			@Override

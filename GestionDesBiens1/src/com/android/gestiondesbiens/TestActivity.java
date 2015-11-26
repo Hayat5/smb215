@@ -226,12 +226,12 @@ public class TestActivity extends Activity {
 		int id = item.getItemId();
 		if (id == R.id.action_get_centers) {
 			this.blnIsLocation = false;
-			this.requestData("http://192.168.1.100:8888/GestionDesBiens/webresources/model.center");
+			this.requestData("http://192.168.1.108:8888/GestionDesBiens/webresources/model.center");
 			return true;
 		}
 		else if (id == R.id.action_get_locations){
 			this.blnIsLocation = true;
-			this.requestData("http://192.168.1.100:8888/GestionDesBiens/webresources/model.location");
+			this.requestData("http://192.168.1.108:8888/GestionDesBiens/webresources/model.location");
 			return true;
 		}
 		else if(id == R.id.action_get_items){

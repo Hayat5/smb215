@@ -98,7 +98,7 @@ public class LoginActivity extends Activity {
 							startActivity(I);
 							return;
 						} else {
-							Intent I = new Intent(getApplicationContext(), UserTransactionActivity.class);
+							Intent I = new Intent(getApplicationContext(), UserTransactionsActivity.class);
 							startActivity(I);
 							return;
 						}
@@ -173,7 +173,7 @@ public class LoginActivity extends Activity {
     	AlertDialog.Builder alert = new AlertDialog.Builder(this);
 
     	alert.setTitle("Server configuration");
-    	alert.setMessage("Specify the server IP address and port.\nFor example: 192.168.1.100:80");
+    	alert.setMessage("Specify the server IP address and port.\nFor example: 192.168.1.1:80");
 
     	// Set an EditText view to get user input 
     	final EditText txtServerIP = new EditText(this);
