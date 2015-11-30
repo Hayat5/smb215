@@ -2,7 +2,7 @@ Projet de gestion des biens par Hayat Bourgi et Guitta Akoury.
 
 Mon email: hayat.bourgi@gmail.com
 
-On a créé  trois applications:
+On a créé  quatre applications:
 
 L'application web “GestionDesBiens" qui gere les biens des sociétés et de les organisations. Dans notre application on a fait la gestion de biens de I-SAE CNAM. On a utiliser le serveur glassfish et pour la sécurité on a utilise les Realms de type form.
 	L’utilisateur a des droits d’acces limites:
